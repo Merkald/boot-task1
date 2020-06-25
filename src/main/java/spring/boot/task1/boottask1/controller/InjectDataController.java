@@ -14,7 +14,11 @@ public class InjectDataController {
     private UserService userService;
 
     @PostConstruct
-    public void injectUser() {
+    public void injectData() {
+        injectUser();
+    }
+
+    private void injectUser() {
         User user = new User()
                 .insertLogin("q")
                 .insertPassword("q");
@@ -26,4 +30,5 @@ public class InjectDataController {
             userService.create(user);
         }
     }
+
 }
