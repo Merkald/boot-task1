@@ -19,14 +19,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getById(String id) {
-        Example<User> user = Example.of(new User().withId(id));
-        return userRepository.findOne(user);
-    }
-
-    @Override
-    public Optional<User> getByProfileName(String profileName) {
-        Example<User> user = Example.of(new User().withProfileName(profileName));
-        return userRepository.findOne(user);
+    public Optional<User> getByField(User user) {
+        Example<User> example = Example.of(user);
+        return userRepository.findOne(example);
     }
 }

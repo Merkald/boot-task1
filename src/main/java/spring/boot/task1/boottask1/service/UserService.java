@@ -6,7 +6,5 @@ import java.util.Optional;
 public interface UserService {
     void create(User user);
 
-    Optional<User> getById(String id);
-
-    Optional<User> getByProfileName(String profileName);
+    Optional<User> getByField(User profileName);
 }

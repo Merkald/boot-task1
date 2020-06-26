@@ -27,4 +27,16 @@ public class User {
         this.profileName = profileName;
         return this;
     }
+
+    public User withReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+        return this;
+    }
+
+    public User addReview(Review review) {
+        Set<Review> reviews = this.reviews;
+        reviews.add(review);
+        this.reviews = reviews;
+        return this;
+    }
 }
