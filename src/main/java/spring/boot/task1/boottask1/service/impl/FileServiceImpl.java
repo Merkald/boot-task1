@@ -6,21 +6,21 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FileServiceImpl implements FileService {
     @Override
-    public String readFile(String path) {
+    public List<String> readFile(String path) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             return bufferedReader
                     .lines()
-                    .reduce((s1, s2) -> s1 + s2)
-                    .orElseThrow();
+                    .collect(Collectors.toList());
         } catch (FileNotFoundException e) {
-            return null;
+            throw new RuntimeException("File doesnt exist");
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException("IOException", e);
         }
     }
 }
