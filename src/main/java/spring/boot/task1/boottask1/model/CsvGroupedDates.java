@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class CsvGroupedDates {
-    Long id;
-    String productId;
-    String userId;
-    String profileName;
-    Long helpfulnessNumerator;
-    Long helpfulnessDenominator;
-    Long score;
-    Long time;
-    String summary;
-    String text;
+    private Long id;
+    private String productId;
+    private String userId;
+    private String profileName;
+    private Long helpfulnessNumerator;
+    private Long helpfulnessDenominator;
+    private Long score;
+    private Long time;
+    private String summary;
+    private String text;
 }
