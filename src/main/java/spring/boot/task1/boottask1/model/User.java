@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 @Entity
 public class User {
     @Id
@@ -17,26 +19,4 @@ public class User {
     private String profileName;
     @OneToMany(mappedBy = "user")
     private Set<Review> reviews;
-
-    public User withId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public User withProfileName(String profileName) {
-        this.profileName = profileName;
-        return this;
-    }
-
-    public User withReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-        return this;
-    }
-
-    public User addReview(Review review) {
-        Set<Review> reviews = this.reviews;
-        reviews.add(review);
-        this.reviews = reviews;
-        return this;
-    }
 }
