@@ -1,13 +1,13 @@
-package spring.boot.task1.boottask1.service.impl;
+package spring.boot.task1.boottask1.service.impl.file;
 
-import org.springframework.stereotype.Service;
-import spring.boot.task1.boottask1.service.FileService;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+import spring.boot.task1.boottask1.service.FileService;
 
 @Service
 public class FileServiceImpl implements FileService {

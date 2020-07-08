@@ -1,11 +1,11 @@
 package spring.boot.task1.boottask1.model;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.Set;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
