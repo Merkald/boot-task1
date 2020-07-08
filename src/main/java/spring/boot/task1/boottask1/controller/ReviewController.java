@@ -1,5 +1,6 @@
 package spring.boot.task1.boottask1.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import spring.boot.task1.boottask1.maper.ReviewMaper;
 import spring.boot.task1.boottask1.model.Review;
-import spring.boot.task1.boottask1.model.User;
 import spring.boot.task1.boottask1.model.dto.request.ReviewRequestDto;
 import spring.boot.task1.boottask1.model.dto.response.ReviewResponseDto;
 import spring.boot.task1.boottask1.service.ReviewService;
 import spring.boot.task1.boottask1.service.UserService;
-import java.util.List;
 
 @RestController
 @RequestMapping("/review")
@@ -39,13 +38,13 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ReviewResponseDto addReview(@RequestBody  ReviewRequestDto reviewRequestDto) {
+    public ReviewResponseDto addReview(@RequestBody ReviewRequestDto reviewRequestDto) {
         Review review = reviewMaper.convert(reviewRequestDto);
         return reviewMaper.convert(reviewService.create(review));
     }
 
     @PutMapping
-    public ReviewResponseDto updateReview(@RequestBody  ReviewRequestDto reviewRequestDto) {
+    public ReviewResponseDto updateReview(@RequestBody ReviewRequestDto reviewRequestDto) {
         Review review = reviewMaper.convert(reviewRequestDto);
         Review fromDb = reviewService.getByField(review).orElseThrow();
         fromDb.setTime(review.getTime())

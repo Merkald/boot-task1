@@ -1,5 +1,8 @@
 package spring.boot.task1.boottask1.controller;
 
+import java.util.List;
+import java.util.Set;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import spring.boot.task1.boottask1.model.Review;
@@ -9,9 +12,6 @@ import spring.boot.task1.boottask1.service.ReviewService;
 import spring.boot.task1.boottask1.service.RoleService;
 import spring.boot.task1.boottask1.service.UserService;
 import spring.boot.task1.boottask1.service.impl.CsvFileParserService;
-import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 public class InjectController {

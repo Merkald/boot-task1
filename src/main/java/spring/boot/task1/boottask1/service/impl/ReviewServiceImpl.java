@@ -1,17 +1,17 @@
 package spring.boot.task1.boottask1.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.repository.ReviewRepository;
 import spring.boot.task1.boottask1.service.ReviewService;
-import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -39,8 +39,8 @@ public class ReviewServiceImpl implements ReviewService {
     public void delete(Review example) {
         reviewRepository
                 .deleteById(getByField(example)
-                .orElseThrow(()->new EntityNotFoundException("Entity with current " +
-                        "fields are not in DB"))
+                        .orElseThrow(() -> new EntityNotFoundException("Entity with current "
+                                + "fields are not in DB"))
                         .getId());
     }
 

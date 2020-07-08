@@ -1,6 +1,5 @@
 package spring.boot.task1.boottask1.model;
 
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +16,7 @@ import lombok.experimental.Accessors;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long DBId;
+    private Long dbId;
     private Long id;
     private Long helpfulnessNumerator;
     private Long helpfulnessDenominator;

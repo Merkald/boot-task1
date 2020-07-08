@@ -1,13 +1,13 @@
 package spring.boot.task1.boottask1.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.service.ProductService;
 import spring.boot.task1.boottask1.service.ReviewService;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
                 .map(str -> reviewService.getAllByField(new Review().setProductId(str)).size())
                 .collect(Collectors.toList());
         List<String> result = new ArrayList<>();
-        for (int i = 0; i<amount;i++) {
+        for (int i = 0; i < amount; i++) {
             int max = activity
                     .stream()
                     .max(Integer::compareTo)
