@@ -26,7 +26,7 @@ public class InjectController {
 
     @PostConstruct
     public void inject() {
-        String path = "C:\\projects\\boot-task1\\src\\main\\resources\\reviews.csv";
+        String path = "src\\main\\resources\\reviews.csv";
         injectRoles();
         injectUsers();
         injectDatesFromFile(csvFileParserService.parseFile(path));

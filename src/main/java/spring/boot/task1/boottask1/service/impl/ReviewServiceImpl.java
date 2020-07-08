@@ -5,6 +5,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.repository.ReviewRepository;
+import spring.boot.task1.boottask1.service.LogicService;
 import spring.boot.task1.boottask1.service.ReviewService;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -15,8 +16,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
+    private static final String NOT_WORDS_REGEXP = "\\W+";
+    private static final String NUMBERS_REGEXP = "[0-9]+";
+
     @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
+    private LogicService logicService;
 
     @Override
     public Review create(Review review) {
@@ -39,8 +45,8 @@ public class ReviewServiceImpl implements ReviewService {
     public void delete(Review example) {
         reviewRepository
                 .deleteById(getByField(example)
-                .orElseThrow(()->new EntityNotFoundException("Entity with current " +
-                        "fields are not in DB"))
+                        .orElseThrow(() -> new EntityNotFoundException("Entity with current " +
+                                "fields are not in DB"))
                         .getId());
     }
 
@@ -49,8 +55,8 @@ public class ReviewServiceImpl implements ReviewService {
         List<String> lines = getAllByField(new Review())
                 .stream()
                 .map(Review::getText)
-                .flatMap(x -> Arrays.stream(x.split("\\W+")))
-                .flatMap(x -> Arrays.stream(x.split("[0-9]+")))
+                .flatMap(x -> Arrays.stream(x.split(NOT_WORDS_REGEXP)))
+                .flatMap(x -> Arrays.stream(x.split(NUMBERS_REGEXP)))
                 .filter(x -> x.length() > 2)
                 .collect(Collectors.toList());
         List<String> words = lines
@@ -66,17 +72,6 @@ public class ReviewServiceImpl implements ReviewService {
                     .count();
             popularity.add(count);
         }
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
-            int max = popularity
-                    .stream()
-                    .max(Integer::compareTo)
-                    .orElseThrow();
-            int indexOfMax = popularity.indexOf(max);
-            result.add(words.get(indexOfMax));
-            words.remove(indexOfMax);
-            popularity.remove(indexOfMax);
-        }
-        return result;
+        return logicService.getMostPopularWords(amount,words,popularity);
     }
 }

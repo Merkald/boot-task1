@@ -3,9 +3,9 @@ package spring.boot.task1.boottask1.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
+import spring.boot.task1.boottask1.service.LogicService;
 import spring.boot.task1.boottask1.service.ProductService;
 import spring.boot.task1.boottask1.service.ReviewService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private LogicService logicService;
 
     @Override
     public List<String> mostCommentedFoodItems(int amount) {
@@ -25,17 +27,6 @@ public class ProductServiceImpl implements ProductService {
                 .stream()
                 .map(str -> reviewService.getAllByField(new Review().setProductId(str)).size())
                 .collect(Collectors.toList());
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i<amount;i++) {
-            int max = activity
-                    .stream()
-                    .max(Integer::compareTo)
-                    .orElseThrow();
-            int indexOfMax = activity.indexOf(max);
-            result.add(products.get(indexOfMax));
-            products.remove(indexOfMax);
-            activity.remove(indexOfMax);
-        }
-        return result;
+       return logicService.getMostPopularWords(amount,products,activity);
     }
 }
