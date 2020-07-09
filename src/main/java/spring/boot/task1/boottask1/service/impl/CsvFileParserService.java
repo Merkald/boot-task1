@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.boot.task1.boottask1.model.CsvGroupedDates;
+import com.univocity.parsers.csv.CsvParser;
+import com.univocity.parsers.csv.CsvParserSettings;
+import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.service.FileParserService;
 import spring.boot.task1.boottask1.service.FileService;
 
 @Service
-public class CsvFileParserService implements FileParserService<List<CsvGroupedDates>> {
+public class CsvFileParserService implements FileParserService<List<Review>> {
     private final int ID = 0;
     private final int PRODUCT_ID = 1;
     private final int USER_ID = 2;
@@ -24,19 +26,24 @@ public class CsvFileParserService implements FileParserService<List<CsvGroupedDa
     private FileService fileService;
 
     @Override
-    public List<CsvGroupedDates> parseFile(String path) {
-        return fileService.readFile(path)
+    public List<Review> parseFile(String path) {
+        List<String> lines = fileService.readFile(path);
+        lines.remove(0);
+        return lines
                 .stream()
                 .map(this::parseString)
                 .collect(Collectors.toList());
     }
 
-    private CsvGroupedDates parseString(String line) {
-        CsvGroupedDates dates = new CsvGroupedDates();
-        String[] splittedLine = line.split(",");
+    private Review parseString(String line) {
+        Review dates = new Review();
+        CsvParserSettings settings = new CsvParserSettings();
+        settings.setMaxCharsPerColumn(100000);
+        CsvParser csvParser = new CsvParser(settings);
+        String[] splittedLine = csvParser.parseLine(line);
         dates.setId(Long.parseLong(splittedLine[ID]));
         dates.setProductId(splittedLine[PRODUCT_ID]);
-        dates.setUserId(splittedLine[USER_ID]);
+        dates.setProfileId(splittedLine[USER_ID]);
         dates.setProfileName(splittedLine[PROFILE_NAME]);
         dates.setHelpfulnessNumerator(Long.parseLong(splittedLine[HELPFULNESS_NUMERATOR]));
         dates.setHelpfulnessDenominator(Long.parseLong(splittedLine[HELPFULNESS_DENOMINATOR]));

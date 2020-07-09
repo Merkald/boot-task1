@@ -17,16 +17,18 @@ import lombok.experimental.Accessors;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long DBId;
     private Long id;
-    private int helpfulnessNumerator;
-    private int helpfulnessDenominator;
-    private int score;
-    private LocalDateTime time;
+    private Long helpfulnessNumerator;
+    private Long helpfulnessDenominator;
+    private Long score;
+    private Long time;
     private String summary;
     @Column(length = 50000)
     private String text;
+    private String profileName;
+    private String profileId;
+    private String productId;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Product product;
 }

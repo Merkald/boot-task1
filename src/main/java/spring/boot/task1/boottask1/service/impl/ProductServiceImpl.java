@@ -1,26 +1,32 @@
 package spring.boot.task1.boottask1.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import spring.boot.task1.boottask1.model.Product;
-import spring.boot.task1.boottask1.repository.ProductRepository;
+import spring.boot.task1.boottask1.model.Review;
+import spring.boot.task1.boottask1.service.PickingService;
 import spring.boot.task1.boottask1.service.ProductService;
-import java.util.Optional;
+import spring.boot.task1.boottask1.service.ReviewService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
-    private ProductRepository productRepository;
+    private ReviewService reviewService;
+    @Autowired
+    private PickingService pickingService;
 
     @Override
-    public void create(Product product) {
-        productRepository.save(product);
-    }
-
-    @Override
-    public Optional<Product> getByField(Product product) {
-        Example<Product> example = Example.of(product);
-        return productRepository.findOne(example);
+    public List<String> mostCommentedFoodItems(int amount) {
+        List<String> products = reviewService.getAllByField(new Review())
+                .stream()
+                .map(Review::getProductId)
+                .distinct()
+                .collect(Collectors.toList());
+        List<Integer> activity = products
+                .stream()
+                .map(str -> reviewService.getAllByField(new Review().setProductId(str)).size())
+                .collect(Collectors.toList());
+        return pickingService.findTopQuantity(amount, products, activity);
     }
 }
