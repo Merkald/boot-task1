@@ -1,14 +1,14 @@
 package spring.boot.task1.boottask1.service.impl;
 
 import org.springframework.stereotype.Service;
-import spring.boot.task1.boottask1.service.LogicService;
+import spring.boot.task1.boottask1.service.PickingService;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class LogicServiceImpl implements LogicService {
+public class PickingServiceImpl implements PickingService {
     @Override
-    public List<String> getMostPopularWords(int amount, List<String> words, List<Integer> activity) {
+    public List<String> findTopQuantity(int amount, List<String> words, List<Integer> activity) {
         List<String> result = new ArrayList<>();
         for (int i = 0; i<amount;i++) {
             int max = activity

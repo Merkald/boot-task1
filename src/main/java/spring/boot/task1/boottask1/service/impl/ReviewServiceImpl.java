@@ -5,7 +5,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.repository.ReviewRepository;
-import spring.boot.task1.boottask1.service.LogicService;
+import spring.boot.task1.boottask1.service.PickingService;
 import spring.boot.task1.boottask1.service.ReviewService;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired
-    private LogicService logicService;
+    private PickingService pickingService;
 
     @Override
     public Review create(Review review) {
@@ -72,6 +72,6 @@ public class ReviewServiceImpl implements ReviewService {
                     .count();
             popularity.add(count);
         }
-        return logicService.getMostPopularWords(amount,words,popularity);
+        return pickingService.findTopQuantity(amount, words, popularity);
     }
 }

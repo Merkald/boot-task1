@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.model.User;
 import spring.boot.task1.boottask1.repository.UserRepository;
-import spring.boot.task1.boottask1.service.LogicService;
+import spring.boot.task1.boottask1.service.PickingService;
 import spring.boot.task1.boottask1.service.ReviewService;
 import spring.boot.task1.boottask1.service.UserService;
 
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ReviewService reviewService;
     @Autowired
-    private LogicService logicService;
+    private PickingService pickingService;
 
     @Override
     public User create(User user) {
@@ -44,6 +44,6 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(str -> reviewService.getAllByField(new Review().setProfileName(str)).size())
                 .collect(Collectors.toList());
-        return logicService.getMostPopularWords(amount,logins,activity);
+        return pickingService.findTopQuantity(amount,logins,activity);
     }
 }
