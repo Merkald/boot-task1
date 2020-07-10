@@ -1,13 +1,13 @@
 package spring.boot.task1.boottask1.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.service.PickingService;
 import spring.boot.task1.boottask1.service.ProductService;
 import spring.boot.task1.boottask1.service.ReviewService;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {

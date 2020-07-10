@@ -1,12 +1,12 @@
 package spring.boot.task1.boottask1.service.impl;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.model.Role;
 import spring.boot.task1.boottask1.repository.RoleRepository;
 import spring.boot.task1.boottask1.service.RoleService;
-import java.util.Optional;
 
 @Service
 public class RoleServiceImpl implements RoleService {
