@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.model.Role;
@@ -15,6 +16,8 @@ import spring.boot.task1.boottask1.service.impl.CsvFileParserService;
 
 @Controller
 public class InjectController {
+    @Value("${FILE_URL}")
+    private String path;
     @Autowired
     private RoleService roleService;
     @Autowired
@@ -26,7 +29,6 @@ public class InjectController {
 
     @PostConstruct
     public void inject() {
-        String path = "https://spring-boot-aws-revievers.s3.eu-central-1.amazonaws.com/Reviews.csv";
         injectRoles();
         injectUsers();
         injectDatesFromFile(csvFileParserService.parseFile(path));

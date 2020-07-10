@@ -24,7 +24,7 @@ public class CsvFileParserService implements FileParserService<List<Review>> {
     private static final int SUMMARY = 8;
     private static final int TEXT = 9;
     @Autowired
-    @Qualifier(value = "linkServiceImpl")
+    @Qualifier(value = "urlService")
     private FileService fileService;
 
     @Override

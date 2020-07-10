@@ -8,11 +8,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import spring.boot.task1.boottask1.service.FileService;
 
+@Primary
 @Service
-public class LinkServiceImpl implements FileService {
+public class UrlService implements FileService {
     @Override
     public List<String> readFile(String path) {
         try {
