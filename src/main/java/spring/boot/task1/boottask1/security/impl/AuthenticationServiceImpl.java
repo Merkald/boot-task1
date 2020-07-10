@@ -7,7 +7,6 @@ import spring.boot.task1.boottask1.model.User;
 import spring.boot.task1.boottask1.security.AuthenticationService;
 import spring.boot.task1.boottask1.service.RoleService;
 import spring.boot.task1.boottask1.service.UserService;
-import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
