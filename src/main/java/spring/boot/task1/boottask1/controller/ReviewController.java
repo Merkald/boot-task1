@@ -18,7 +18,7 @@ import spring.boot.task1.boottask1.service.ReviewService;
 import spring.boot.task1.boottask1.service.UserService;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/reviews")
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;

@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import spring.boot.task1.boottask1.model.Review;
 import spring.boot.task1.boottask1.model.Role;
@@ -26,6 +27,8 @@ public class InjectController {
     private CsvFileParserService csvFileParserService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void inject() {
@@ -39,12 +42,12 @@ public class InjectController {
         admin.setLogin("admin");
         admin.setRoles(Set.of(roleService
                 .getByField(new Role().setRoleName(Role.RoleName.ADMIN)).orElseThrow()));
-        admin.setPassword("1234");
+        admin.setPassword(passwordEncoder.encode("1234"));
         User user = new User();
         user.setLogin("user");
         user.setRoles(Set.of(roleService
                 .getByField(new Role().setRoleName(Role.RoleName.USER)).orElseThrow()));
-        user.setPassword("1234");
+        user.setPassword(passwordEncoder.encode("1234"));
         userService.create(admin);
         userService.create(user);
     }
