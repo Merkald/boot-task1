@@ -25,4 +25,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .getByField(new Role().setRoleName(Role.RoleName.USER)).orElseThrow());
         return userService.create(user);
     }
+
+    @Override
+    public User login(String login, String password) {
+        User user = userService.getByField(new User().setLogin(login)).orElseThrow();
+        String encodedPassword = passwordEncoder.encode(password);
+        if (user == null || user.getPassword().equals(encodedPassword)) {
+            throw new RuntimeException("Incorrect username or password!!!");
+        }
+        return user;
+    }
 }
