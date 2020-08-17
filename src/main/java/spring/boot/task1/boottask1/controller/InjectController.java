@@ -32,9 +32,9 @@ public class InjectController {
 
     @PostConstruct
     public void inject() {
+        injectDatesFromFile(csvFileParserService.parseFile(path));
         injectRoles();
         injectUsers();
-        injectDatesFromFile(csvFileParserService.parseFile(path));
     }
 
     private void injectUsers() {
